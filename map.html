@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Map1111</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+        #map {
+            height: 100%;
+        }
+
+        /* Optional: Makes the sample page fill the window. */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Thee google map</h1>
+    <div id="map"></div>
+    <script>
+        //main js
+        function initMap() {
+            //map
+            var map;
+            var options = {
+                center: { lat: -25.731340, lng: 28.218370 },
+                zoom: 10
+            }
+            map = new google.maps.Map(document.getElementById('map'), options);
+            /*
+                        //add marker
+                        var marker = new google.maps.marker({
+                            position:{lat: -25.731340, lng: 28.218370}, 
+                            map:map //can add custom marker here
+                            //icon: 'url'
+                        });
+            
+                        var info = new google.maps.info({
+                            content:'<h1>some stuff</h1>'
+                        });
+            
+                        marker.addistener('click',function(){
+                            info.open(map,marker);
+                        }); */
+
+            addMarker({
+                coords: { lat: -25.731340, lng: 28.218370 },
+                content: '<h1>some stuff</h1>'
+                //iconImage:'url'
+            });
+            addMarker({
+                coords: { lat: 26.2041, lng: 28.0473 },
+                content: '<h1>some stuff2</h1>'
+                //iconImage:'url'
+            }); //can add multipe markers
+            addMarker({
+                coords: { lat: -25.731340, lng: 28.218370 }
+                //iconImage:'url'
+            });
+
+            //add market function
+            function addMarker(props) {
+                var marker = new google.maps.marker({
+                    position: props.coords,
+                    map: map //can add custom marker here
+                    //icon: 'url'or props.iconImage
+                });
+
+                //check custom image
+                if (props.iconImage) {
+                    marker.setIcon(props.iconImage)
+                }
+
+                //check content
+                if (props.content) {
+                    var info = new google.maps.info({
+                        content: props.content
+                    });
+                }
+
+                marker.addistener('click',function(){
+                            info.open(map,marker);
+                        });
+            }
+        }
+
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6Vjpxdw34bS1R4N6T4Kzwou1S56wvHfE&callback=initMap"
+        async defer></script>
+</body>
+
+</html>
